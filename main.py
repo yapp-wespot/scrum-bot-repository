@@ -42,7 +42,6 @@ async def send_daily_message():
     now = datetime.now()
     month = str(now.month)
     day = str(now.day)
-    print("hello")
 
     # weekday= now.weekday()
     # kr_holidays = holidays.KR(years=now.year)
@@ -59,7 +58,8 @@ async def send_daily_message():
 async def startScheduler():
     KST = pytz.timezone('Asia/Seoul')
     scheduler = AsyncIOScheduler(timezone=KST)
-    scheduler.add_job(send_daily_message, CronTrigger(hour=9, minute=12))
+    # scheduler.add_job(send_daily_message, CronTrigger(hour=9, minute=14))
+    scheduler.add_job(send_daily_message, 'interval', minute=1)
     scheduler.start()
 
 @client.event
