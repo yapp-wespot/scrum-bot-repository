@@ -51,10 +51,12 @@ async def send_daily_message():
             await createMessage.create_thread(name=month+"/"+day)
     else:
         print(f"Cannot find channel with ID {str(CHANNEL_ID)}")
+        
 
 @client.event
 async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=discord.Game('스크럼 봇 가동'))
     await send_daily_message()
+    await client.close()
 
 client.run(TOKEN)
