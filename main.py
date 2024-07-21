@@ -59,7 +59,7 @@ async def send_daily_message():
 async def startScheduler():
     KST = pytz.timezone('Asia/Seoul')
     scheduler = AsyncIOScheduler(timezone=KST)
-    scheduler.add_job(send_daily_message, CronTrigger(hour=18, minute=10))
+    scheduler.add_job(send_daily_message, CronTrigger(hour=9, minute=12))
     scheduler.start()
 
 @client.event
