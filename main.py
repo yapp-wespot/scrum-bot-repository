@@ -1,16 +1,14 @@
 import discord
 import holidays
-import yaml
+import os
 from discord.ext import commands
 from datetime import datetime
 
 intents = discord.Intents.default()
 intents.message_content = True
 client = commands.Bot(command_prefix='./',intents=intents)
-with open("application.yml", "r") as file:
-    config = yaml.safe_load(file)
-TOKEN=config["discord"]["token"]
-CHANNEL_ID=int(config["discord"]["channel_id"])
+TOKEN = os.getenv('DISCORD_TOKEN')
+CHANNEL_ID = int(os.getenv('DISCORD_CHANNEL_ID'))
 
 messages = [
     "고통의 월요일 ♥️\n"+
