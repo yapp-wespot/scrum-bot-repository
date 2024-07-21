@@ -49,9 +49,8 @@ async def send_daily_message():
         return;
 
     if channel:
-        for message in messages:
-            createMessage = await channel.send(month+"/"+day+" "+message)
-            await createMessage.create_thread(name=month+"/"+day)
+        createMessage = await channel.send(month+"/"+day+" "+messages[weekday])
+        await createMessage.create_thread(name=month+"/"+day)
     else:
         print(f"Cannot find channel with ID {str(CHANNEL_ID)}")
 
