@@ -3,6 +3,7 @@ name: Run Discord Bot
 on:
   schedule:
     - cron: "* * * * *"
+  workflow_dispatch:
 
 jobs:
   run-bot:
