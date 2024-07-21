@@ -40,10 +40,10 @@ async def send_daily_message():
     month = str(now.month)
     day = str(now.day)
 
-    # weekday= now.weekday()
-    # kr_holidays = holidays.KR(years=now.year)
-    # if now.date() in kr_holidays or 5 <= weekday:
-    #     return;
+    weekday= now.weekday()
+    kr_holidays = holidays.KR(years=now.year)
+    if now.date() in kr_holidays or 5 <= weekday:
+        return;
 
     if channel:
         for message in messages:
