@@ -43,10 +43,10 @@ async def send_daily_message():
     month = str(now.month)
     day = str(now.day)
 
-    # weekday= now.weekday()
-    # kr_holidays = holidays.KR(years=now.year)
-    # if now.date() in kr_holidays or 5 <= weekday:
-    #     return;
+    weekday= now.weekday()
+    kr_holidays = holidays.KR(years=now.year)
+    if now.date() in kr_holidays or 5 <= weekday:
+        return;
 
     if channel:
         for message in messages:
@@ -58,8 +58,7 @@ async def send_daily_message():
 async def startScheduler():
     KST = pytz.timezone('Asia/Seoul')
     scheduler = AsyncIOScheduler(timezone=KST)
-    # scheduler.add_job(send_daily_message, CronTrigger(hour=9, minute=14))
-    scheduler.add_job(send_daily_message, 'interval', minutes=1)
+    scheduler.add_job(send_daily_message, CronTrigger(hour=3, minute=0))
     scheduler.start()
 
 @client.event
