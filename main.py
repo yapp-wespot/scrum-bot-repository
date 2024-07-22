@@ -1,10 +1,8 @@
 import discord
 import holidays
 import os
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from discord.ext import commands
 from datetime import datetime
-from apscheduler.triggers.cron import CronTrigger
 import pytz
 
 intents = discord.Intents.default()
@@ -54,15 +52,10 @@ async def send_daily_message():
     else:
         print(f"Cannot find channel with ID {str(CHANNEL_ID)}")
 
-async def startScheduler():
-    KST = pytz.timezone('Asia/Seoul')
-    scheduler = AsyncIOScheduler(timezone=KST)
-    scheduler.add_job(send_daily_message, CronTrigger(hour=3, minute=0))
-    scheduler.start()
-
 @client.event
 async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=discord.Game('스크럼 봇 가동'))
-    await startScheduler()
+    await send_daily_message()
+    await client.close()
 
 client.run(TOKEN)
