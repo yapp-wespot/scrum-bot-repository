@@ -33,6 +33,7 @@ messages = [
     "어제 한 일과 오늘 할 일을 공유해보아요 🔥\n"+
     "내일 만나욤 🚀",
 ]
+MVP_DATE_TIME = datetime(2024, 8, 17, 23, 0)
 
 async def send_daily_message():
     await client.wait_until_ready()
@@ -40,14 +41,19 @@ async def send_daily_message():
     now = datetime.now()
     month = str(now.month)
     day = str(now.day)
-
+    
+    dayDifference = (MVP_DATE_TIME - now).days
+    dday = max(0,dayDifference)
     weekday= now.weekday()
     kr_holidays = holidays.KR(years=now.year)
+
     if now.date() in kr_holidays or 5 <= weekday:
         return;
 
     if channel:
-        createMessage = await channel.send(month+"/"+day+" "+messages[weekday])
+        dday_message = f"📢 MVP 출시 D-{dday} 📢"
+        daily_message = f"{month}/{day} {messages[weekday]}"
+        createMessage = await channel.send(dday_message+"\n\n"+daily_message)
         await createMessage.create_thread(name=month+"/"+day)
     else:
         print(f"Cannot find channel with ID {str(CHANNEL_ID)}")
