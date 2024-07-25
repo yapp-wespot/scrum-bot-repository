@@ -59,7 +59,7 @@ async def send_daily_message():
     else:
         print(f"Cannot find channel with ID {str(CHANNEL_ID)}")
 
-async def getDdayMessage(now):
+def getDdayMessage(now):
     index=0
     dday=0
     messageByDate=""
