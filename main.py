@@ -32,10 +32,15 @@ messages = [
     "데일리 스크럼 시간이에요 BFF ⏰\n"+
     "어제 한 일과 오늘 할 일을 공유해보아요 🔥\n"+
     "내일 만나욤 🚀",
+    "",
+    "⭐️행복한 위스팟의 2024년을 만들어주세요!⭐️"+
+    "벌써 돌아온 일요일?!😲"+
+    "이번주 한 일과 다음주에 할 일을 공유해보아요🔥"+
+    "우리끼리 연말 쪽지~ 새해 쪽지~ 가 보 자 고🔫"
 ]
 
-DATES=[datetime(2024, 7, 31, 23, 0), datetime(2024, 8, 21, 23, 0), datetime(2024, 8, 31, 23, 0), datetime(2024, 9, 14, 23, 0), datetime(2024, 9, 14, 23, 0)]
-MESSAGES_BY_DATES=["📢 2차 스프린트 마감 D-{} 📢", "📢 이제는 더 이상 물러날 곳이 없다 D-{} 📢", "📢 데모데이 두 과 자 🥰 D-{} 📢","📢 1등 두 과 자 🥰 D-{} 📢", "📢 홍보 두 과 자 🥰 📢"]
+# DATES=[datetime(2024, 7, 31, 23, 0), datetime(2024, 8, 21, 23, 0), datetime(2024, 8, 31, 23, 0), datetime(2024, 9, 14, 23, 0), datetime(2024, 9, 14, 23, 0)]
+# MESSAGES_BY_DATES=["📢 2차 스프린트 마감 D-{} 📢", "📢 이제는 더 이상 물러날 곳이 없다 D-{} 📢", "📢 데모데이 두 과 자 🥰 D-{} 📢","📢 1등 두 과 자 🥰 D-{} 📢", "📢 홍보 두 과 자 🥰 📢"]
 
 async def send_daily_message():
     await client.wait_until_ready()
@@ -45,35 +50,36 @@ async def send_daily_message():
     day = str(now.day)
 
     weekday= now.weekday()
-    kr_holidays = holidays.KR(years=now.year)
+    # kr_holidays = holidays.KR(years=now.year)
 
-    if now.date() in kr_holidays or 5 <= weekday:
-        return;
+    # if now.date() in kr_holidays or 5 <= weekday:
+    #     return
 
     if channel:
-        dday_message = getDdayMessage(now)
+        # dday_message = getDdayMessage(now)
         daily_message = f"{month}/{day} {messages[weekday]}"
-        createMessage = await channel.send(dday_message+"\n\n"+daily_message)
+        # createMessage = await channel.send(dday_message+"\n\n"+daily_message)
+        createMessage = await channel.send(daily_message)
         await createMessage.create_thread(name=month+"/"+day)
     else:
         print(f"Cannot find channel with ID {str(CHANNEL_ID)}")
 
-def getDdayMessage(now):
-    index=0
-    dday=0
-    messageByDate=""
+# def getDdayMessage(now):
+#     index=0
+#     dday=0
+#     messageByDate=""
 
-    while index < len(DATES):
-        dday=(DATES[index]-now).days
-        messageByDate=MESSAGES_BY_DATES[index]
-        if 0<=dday:
-            break
-        index+=1
+#     while index < len(DATES):
+#         dday=(DATES[index]-now).days
+#         messageByDate=MESSAGES_BY_DATES[index]
+#         if 0<=dday:
+#             break
+#         index+=1
 
-    if dday<0:
-        return messageByDate
+#     if dday<0:
+#         return messageByDate
 
-    return messageByDate.format(dday)
+#     return messageByDate.format(dday)
 
 @client.event
 async def on_ready():
