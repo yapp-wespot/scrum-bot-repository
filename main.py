@@ -3,7 +3,6 @@ import holidays
 import os
 from discord.ext import commands
 from datetime import datetime
-import pytz
 
 intents = discord.Intents.default()
 intents.message_content = True
