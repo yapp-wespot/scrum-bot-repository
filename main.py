@@ -19,10 +19,9 @@ messages = [
   데일리 스크럼 시간이에요 BFF ⏰
   어제 한 일과 오늘 할 일을 공유해보아요 🔥
   레 츠 고 우 🚀""",
-  """인내의 수요일 ♥️
-  데일리 스크럼 시간이에요 BFF ⏰
-  어제 한 일과 오늘 할 일을 공유해보아요 🔥
-  오늘 하루도 화이팅 🚀""",
+  """스크럼 시간이에요 BFF🏋🏻
+  위스팟 어디까지 왔나요! ☄️
+  1) 주말 이후 새롭게 한 일과 2) 일요일까지의 목표를 공유해보아요 🚀""",
   """희망의 목요일 ♥️
   데일리 스크럼 시간이에요 BFF ⏰
   어제 한 일과 오늘 할 일을 공유해보아요 🔥
@@ -35,10 +34,9 @@ messages = [
   시간이 너무 빠르다 빨라⏰
   이번주 한 일과 다음주에 할 일을 공유해보아요 🚀
   """,
-  """⭐️행복한 위스팟의 2025년을 만들어주세요!⭐️
-  벌써 돌아온 일요일?!😲
-  이번주 한 일과 다음주에 할 일을 공유해보아요🔥
-  가 보 자 고🔫"""
+  """스크럼 시간이에요 BFF🏋🏻
+  목표 잘 지켜봅시다앙 ☄️
+  1) 이번주 한 일과 2) 다음주 중 할 일을 공유해보아요 🚀🔫"""
 ]
 
 
@@ -55,7 +53,7 @@ async def send_daily_message():
   weekday = now.weekday()
   # kr_holidays = holidays.KR(years=now.year)
 
-  if weekday != 5:  # This workflow run only on Saturdays
+  if weekday not in [2, 6]:
     return
 
   # if weekday != 6 and (now.date() in kr_holidays or weekday % 2 != 0):
